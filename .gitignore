@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+
+# Sorties de compilation Buildozer
+.buildozer/
+bin/
+
+# Coffres de test créés en lançant l'application sur le bureau
+*.vault
+*.vault.tmp
+
+.idea/
+.vscode/

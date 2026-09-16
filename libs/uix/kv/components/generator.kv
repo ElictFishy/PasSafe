@@ -1,0 +1,70 @@
+<SwitchRow@MDBoxLayout>:
+    text: ""
+    active: True
+    size_hint_y: None
+    height: dp(40)
+
+    MDLabel:
+        text: root.text
+        font_style: "Field"
+        valign: "center"
+
+    MDSwitch:
+        active: root.active
+        pos_hint: {"center_y": .5}
+        size_hint_x: None
+        width: dp(56)
+        on_active: root.active = self.active
+
+
+<GeneratorContent>:
+    orientation: "vertical"
+    spacing: dp(8)
+    adaptive_height: True
+
+    MDLabel:
+        text: root.password
+        font_style: "Secret"
+        halign: "center"
+        size_hint_y: None
+        height: dp(56)
+
+    MDBoxLayout:
+        size_hint_y: None
+        height: dp(40)
+
+        MDLabel:
+            text: "Longueur : %d" % int(length.value)
+            font_style: "Field"
+            valign: "center"
+            size_hint_x: None
+            width: dp(120)
+
+        MDSlider:
+            id: length
+            min: 8
+            max: 40
+            value: 20
+            step: 1
+            hint: False
+            on_value: root.shuffle()
+
+    SwitchRow:
+        id: uppercase
+        on_active: root.shuffle()
+        text: "Majuscules"
+
+    SwitchRow:
+        id: digits
+        on_active: root.shuffle()
+        text: "Chiffres"
+
+    SwitchRow:
+        id: symbols
+        on_active: root.shuffle()
+        text: "Caractères spéciaux"
+
+    MDFlatButton:
+        text: "Tirer un autre mot de passe"
+        pos_hint: {"center_x": .5}
+        on_release: root.shuffle()

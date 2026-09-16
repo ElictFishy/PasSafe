@@ -1,0 +1,84 @@
+<EntryScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Modifier" if root.entry_id else "Nouvelle entrée"
+            elevation: 2
+            md_bg_color: app.theme_cls.bg_dark
+            specific_text_color: app.theme_cls.text_color
+            left_action_items: [["arrow-left", lambda x: root.back()]]
+            right_action_items: [["delete-outline", lambda x: root.confirm_delete()]] if root.entry_id else []
+
+        MDScrollView:
+
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(20), dp(16)
+                spacing: dp(14)
+                adaptive_height: True
+
+                TextFieldRound:
+                    id: title
+                    hint_text: "Nom du service"
+                    icon_left: "web"
+
+                TextFieldRound:
+                    id: username
+                    hint_text: "Identifiant"
+                    icon_left: "account-outline"
+
+                TextFieldRound:
+                    id: password
+                    hint_text: "Mot de passe"
+                    icon_left: "key-variant"
+                    password: not root.revealed
+
+                # Les actions sur le mot de passe sont sous le champ : sur un
+                # téléphone, quatre widgets sur une ligne ne laissent plus
+                # rien au texte.
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: dp(48)
+                    padding: 0, 0, dp(4), 0
+
+                    Widget:
+
+                    MDIconButton:
+                        icon: "eye-off-outline" if root.revealed else "eye-outline"
+                        on_release: root.revealed = not root.revealed
+
+                    MDIconButton:
+                        icon: "content-copy"
+                        on_release: root.copy_password()
+
+                    MDIconButton:
+                        icon: "dice-5-outline"
+                        on_release: root.open_generator()
+
+                TextFieldRound:
+                    id: url
+                    hint_text: "Adresse du site"
+                    icon_left: "link-variant"
+
+                TextFieldRound:
+                    id: notes
+                    hint_text: "Notes"
+                    icon_left: "note-text-outline"
+                    multiline: True
+                    max_height: dp(120)
+
+                MDLabel:
+                    text: root.error
+                    font_style: "Hint"
+                    theme_text_color: "Custom"
+                    text_color: app.theme_cls.error_color
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                MDRaisedButton:
+                    text: "Enregistrer"
+                    pos_hint: {"center_x": .5}
+                    size_hint_x: .8
+                    on_release: root.save()

@@ -1,0 +1,113 @@
+<HomeScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(28), dp(24)
+        spacing: dp(14)
+
+        Widget:
+
+        MDIcon:
+            icon: "shield-lock-outline"
+            font_size: "72sp"
+            pos_hint: {"center_x": .5}
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+
+        MDLabel:
+            text: "PasSafe"
+            font_style: "Logo"
+            halign: "center"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDLabel:
+            text: "Créez le coffre qui gardera vos mots de passe." if root.mode == "create" else "Le coffre est verrouillé."
+            font_style: "Hint"
+            halign: "center"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        Widget:
+            size_hint_y: None
+            height: dp(12)
+
+        TextFieldRound:
+            id: password
+            hint_text: "Mot de passe maître"
+            icon_left: "key-variant"
+            password: True
+            write_tab: False
+            on_text: root.on_password_text(self.text)
+            on_text_validate: root.submit()
+
+        # Bloc affiché seulement à la création du coffre. Masqué, il est aussi
+        # désactivé : ses champs ne prennent ni la frappe ni les touches.
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            size_hint_y: None
+            height: self.minimum_height if root.mode == "create" else 0
+            opacity: 1 if root.mode == "create" else 0
+            disabled: root.mode != "create"
+
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: dp(24)
+                opacity: 1 if root.strength_label else 0
+
+                MDProgressBar:
+                    value: root.strength_value
+                    size_hint_y: None
+                    height: dp(4)
+
+                MDLabel:
+                    text: root.strength_label
+                    font_style: "Hint"
+                    halign: "right"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: dp(20)
+
+            TextFieldRound:
+                id: confirm
+                hint_text: "Confirmez le mot de passe maître"
+                icon_left: "key-plus"
+                password: True
+                write_tab: False
+                on_text_validate: root.submit()
+
+        MDLabel:
+            text: root.error
+            font_style: "Hint"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.error_color
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDRaisedButton:
+            text: "Créer le coffre" if root.mode == "create" else "Déverrouiller"
+            pos_hint: {"center_x": .5}
+            size_hint_x: .8
+            disabled: root.busy
+            on_release: root.submit()
+
+        MDSpinner:
+            size_hint: None, None
+            size: dp(28), dp(28)
+            pos_hint: {"center_x": .5}
+            active: root.busy
+            opacity: 1 if root.busy else 0
+
+        Widget:
+
+        MDLabel:
+            text: "Rien ne sort du téléphone : le coffre est chiffré en AES et conservé en local."
+            font_style: "Hint"
+            halign: "center"
+            theme_text_color: "Hint"
+            size_hint_y: None
+            height: self.texture_size[1]

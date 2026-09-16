@@ -1,10 +1,14 @@
 {
-    "from libs.uix.baseclass.home_screen import HomeScreen": {
-        "screen_name": "home",
-        "factory": "Factory.HomeScreen()"
+    "home": {
+        "module": "libs.uix.baseclass.home_screen",
+        "class": "HomeScreen"
     },
-    "from libs.uix.baseclass.pass_screen import PassScreen": {
-    	"screen_name": "pass",
-    	"factory": "Factory.PassScreen()"
+    "pass": {
+        "module": "libs.uix.baseclass.pass_screen",
+        "class": "PassScreen"
+    },
+    "entry": {
+        "module": "libs.uix.baseclass.entry_screen",
+        "class": "EntryScreen"
     }
 }

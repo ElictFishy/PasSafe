@@ -22,6 +22,9 @@ source.include_exts = py,kv,png,jpg,jpeg,atlas,ttf,json
 source.exclude_exts = log, pyc
 
 # (list) List of directory to exclude (let empty to not exclude anything)
+source.exclude_dirs = tests, bin, .buildozer, .github
+
+# (list) List of directory to exclude (let empty to not exclude anything)
 #source.exclude_dirs = tests, bin
 
 # (list) List of exclusions using pattern matching
@@ -36,7 +39,7 @@ version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.0.0,https://github.com/kivymd/KivyMD/archive/master.zip,sdl2_ttf==2.0.15,pillow
+requirements = python3,kivy==2.3.0,kivymd==1.2.0,pycryptodome,pillow,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -82,10 +85,11 @@ fullscreen = 0
 # red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
 # darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
 # olive, purple, silver, teal.
-android.presplash_color = white
+android.presplash_color = #212121
 
 # (list) Permissions
-#android.permissions = INTERNET
+# Aucune : l'application ne sort jamais du téléphone.
+#android.permissions =
 
 # (int) Target Android API, should be as high as possible.
 #android.api = 27
@@ -218,8 +222,12 @@ android.presplash_color = white
 # (bool) Copy library instead of making a libpymodules.so
 #android.copy_libs = 1
 
-# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.arch = armeabi-v7a
+# (list) The Android archs to build for
+android.archs = arm64-v8a, armeabi-v7a
+
+# (bool) Sauvegarde Android désactivée : sans cela, `adb backup` sortirait le
+# fichier du coffre de l'espace privé de l'application.
+android.allow_backup = False
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
