@@ -39,7 +39,7 @@ version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.3.1,kivymd==1.2.0,pycryptodome,pillow,android
+requirements = python3,kivy==2.3.0,kivymd==1.2.0,pycryptodome,pillow,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -101,7 +101,8 @@ android.presplash_color = #212121
 #android.sdk = 20
 
 # (str) Android NDK version to use
-#android.ndk = 19b
+# Version attendue par la release de p4a épinglée plus bas.
+android.ndk = 25b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
@@ -243,7 +244,10 @@ android.allow_backup = False
 #p4a.fork = kivy
 
 # (str) python-for-android branch to use, defaults to master
-#p4a.branch = master
+# Release datée plutôt que master : master construit CPython 3.14, dont la
+# chaîne p4a n'est pas encore capable (Kivy ne compile pas, puis pip casse à
+# l'installation des modules). Cette version fige Python 3.11 et Kivy 2.3.0.
+p4a.branch = v2024.01.21
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 #p4a.source_dir =

@@ -59,7 +59,7 @@ tests/                      Tests du coffre et du générateur, sans interface
 ## Lancer sur le bureau
 
 ```bash
-pip install kivy==2.3.1 kivymd==1.2.0 pycryptodome pillow
+pip install kivy==2.3.0 kivymd==1.2.0 pycryptodome pillow
 python main.py
 ```
 
