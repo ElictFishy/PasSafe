@@ -127,7 +127,9 @@ android.presplash_color = #212121
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
-# android.accept_sdk_license = False
+# Sans cette ligne, sdkmanager répond « non » à la licence Google et les
+# build-tools ne s'installent pas : la compilation échoue sur « Aidl not found ».
+android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.renpy.android.PythonActivity
